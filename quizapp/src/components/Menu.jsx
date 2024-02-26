@@ -1,6 +1,7 @@
 import { Tabs } from '@aws-amplify/ui-react';
 
 import CreateQuizForm from './CreateQuizForm';
+import MyQuizzes from './MyQuizzes';
 
 export default function MenuApp() {
     return (
@@ -8,7 +9,8 @@ export default function MenuApp() {
             defaultValue={'Tab 1'}
             items={[
                 { label: 'Create Quiz', value: 'Tab 1', content: <CreateQuizForm></CreateQuizForm> },
-                { label: 'Play!', value: 'Tab 2', content: <p>My quizes!</p> },
+                { label: 'Play!', value: 'Tab 2', content: <MyQuizzes></MyQuizzes> },
+                { label: 'Current game', value: 'Tab 3', content: <p>No current game yet!</p>},
             ]}
         />
     );

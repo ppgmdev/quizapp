@@ -1,0 +1,12 @@
+.amplify-card {
+  margin: 2rem;
+}
+
+.amplify-card:hover {
+  background-color: var(--amplify-colors-primary-40);
+  cursor: pointer;
+}
+
+.quizform {
+  margin: 2rem
+}
