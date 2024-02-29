@@ -1,9 +1,12 @@
 import Menu from './components/Menu.jsx'
+import QuizContextProvider from './store/quiz-context.jsx'
 
 function App() {
 
   return (
-    <Menu></Menu>
+    <QuizContextProvider>
+      <Menu></Menu>
+    </QuizContextProvider>
   )
 }
 

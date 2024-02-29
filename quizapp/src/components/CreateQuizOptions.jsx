@@ -1,14 +1,10 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, forwardRef } from 'react';
 
 import { Radio, RadioGroupField, Flex, Label, Input } from '@aws-amplify/ui-react';
 
-export default function CreateQuizOptions({number}) {
+const CreateQuizOptions = forwardRef(function QuizOptions({number}, ref) {
 
-    const refQuestion = useRef();
-    const refOption1 = useRef();
-    const refOption2 = useRef();
-    const refOption3 = useRef();
-    const refOption4 = useRef();
+    const {refQuestion, refOption1, refOption2, refOption3, refOption4} = ref;
 
     useEffect(() => {
         refQuestion.current.value = ""
@@ -33,3 +29,5 @@ export default function CreateQuizOptions({number}) {
         </>
     )
 }
+)
+export default CreateQuizOptions
