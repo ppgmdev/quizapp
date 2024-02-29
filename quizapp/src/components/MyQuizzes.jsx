@@ -6,44 +6,13 @@ import { QuizContext } from '../store/quiz-context.jsx';
 
 export default function MyQuizzes() {
 
-    const [showQuiz, setShowQuiz] = useState({
-        show: false,
-        id: '',
-        questions: [],
-    });
-
-    function handleClick(id) {
-        
-        const quiz = quizzes.find((quiz) => quiz.id.toString() === id.toString())
-        console.log(quiz)
-        if(quiz){
-            const quizQuestions = quiz.questions
-            setShowQuiz(prevState => ({
-                ...prevState,
-                show: true,
-                id: id,
-                questions: [
-                    quizQuestions
-                ]
-            }));
-        } else{
-            console.log('Quiz not found')
-        }
-        
-
-        console.log(showQuiz)
-    }
-
+    const {quizzes} = useContext(QuizContext)
 
     return (
         <>
             {quizzes.map((quiz) => {
-                return <Card className='card-quiz' id={quiz.id} onClick={() => handleClick(quiz.id)} variation="elevated" key={quiz.id}>{quiz.title}</Card>
+                return <Card className='card-quiz' id={quiz.id} variation="elevated" key={quiz.id}>{quiz.title}</Card>
             })}
-
-            {showQuiz && showQuiz.questions.map((q) =>{
-                return <p key={Math.random()}>{q.question}</p>
-            } )}
         </> 
     )
 }
