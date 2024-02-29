@@ -6,7 +6,7 @@ import { QuizContext } from '../store/quiz-context.jsx';
 
 export default function CreateQuizForm() {
 
-    const {quizzes, addQuestionToQuiz} = useContext(QuizContext)
+    const {addQuestionToQuiz} = useContext(QuizContext)
 
     const refQuizName = useRef();
     const refQuestion = useRef();
@@ -57,7 +57,6 @@ export default function CreateQuizForm() {
         }
         addQuestionToQuiz(quizID, title, payload)
         setCurrentQuestion(1)
-        console.log(quizID)
     }
 
     return (
