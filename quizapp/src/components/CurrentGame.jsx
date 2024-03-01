@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { QuizContext } from '../store/quiz-context.jsx';
 import { Radio, RadioGroupField, Button } from '@aws-amplify/ui-react';
 
 export default function CurrentGame() {
+
+    const myRef = useRef();
 
     const { quizzes, currentQuiz } = useContext(QuizContext)
 
@@ -10,10 +12,18 @@ export default function CurrentGame() {
 
     let quiz;
     let questionsArray;
+    let totalCorrect = 0;
 
     if (currentQuiz !== '') {
         quiz = quizzes.find((quiz) => quiz.id === currentQuiz)
         questionsArray = quiz.questions;
+        console.log(questionsArray.length)
+    }
+
+    function handleAnswerClick(isCorrect) {
+        if(isCorrect){
+            totalCorrect = totalCorrect + 1
+        }
     }
 
     return (
@@ -24,12 +34,12 @@ export default function CurrentGame() {
                     {questionsArray.map((q) => {
                         return(<>
                         <h3>{q.question}</h3>
-                        <RadioGroupField name={`Answers ${q.id}`}>
-                        {q.answers.map((a) =><Radio display='flex'>{`${a.answer} is correct? ${a.isCorrect}`}</Radio>)}
+                        <RadioGroupField ref={myRef} name={`Answers ${q.id}`}>
+                        {q.answers.map((a) =><Radio onClick={() => handleAnswerClick(a.isCorrect)} display='flex'>{`${a.answer} is correct? ${a.isCorrect}`}</Radio>)}
                         </RadioGroupField>
                         </>)
                     })}
-                    <Button className='button'>Submit!</Button>
+                    <Button onClick={() => console.log(totalCorrect)} className='button'>Submit!</Button>
                 </div>
 
                 : <p>No current quiz!!</p>}
