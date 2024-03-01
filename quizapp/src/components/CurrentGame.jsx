@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { QuizContext } from '../store/quiz-context.jsx';
 import { Radio, RadioGroupField, Button } from '@aws-amplify/ui-react';
 
@@ -8,11 +8,13 @@ export default function CurrentGame() {
 
     const { quizzes, currentQuiz } = useContext(QuizContext)
 
+    const [showScore, setShowScore] = useState(false)
+    const [totalCorrect, setTotalCorrect] = useState(0);
+
     console.log(quizzes)
 
     let quiz;
     let questionsArray;
-    let totalCorrect = 0;
 
     if (currentQuiz !== '') {
         quiz = quizzes.find((quiz) => quiz.id === currentQuiz)
@@ -22,8 +24,14 @@ export default function CurrentGame() {
 
     function handleAnswerClick(isCorrect) {
         if(isCorrect){
-            totalCorrect = totalCorrect + 1
+            setTotalCorrect((prev) => prev + 1)
         }
+    }
+
+    function handleSubmit() {
+        setShowScore(true);
+        console.log(`totalCorrect: ${totalCorrect}`);
+        console.log(`questions array: ${questionsArray.length}`)
     }
 
     return (
@@ -39,7 +47,8 @@ export default function CurrentGame() {
                         </RadioGroupField>
                         </>)
                     })}
-                    <Button onClick={() => console.log(totalCorrect)} className='button'>Submit!</Button>
+                    <Button onClick={handleSubmit} className='button'>Submit!</Button>
+                    {showScore ? <p>{`Your score is ${totalCorrect*100/questionsArray.length}`}</p> : undefined}
                 </div>
 
                 : <p>No current quiz!!</p>}

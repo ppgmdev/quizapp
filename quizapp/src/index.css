@@ -14,3 +14,11 @@
 .button {
   margin-top: 2rem;
 }
+
+.incorrect {
+  background-color: var(--amplify-colors-red-60)
+}
+
+.correct {
+  background-color: var(--amplify-colors-green-60)
+}
