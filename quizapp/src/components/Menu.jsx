@@ -1,10 +1,10 @@
 import { Tabs } from '@aws-amplify/ui-react';
-
 import CreateQuizForm from './CreateQuizForm';
 import MyQuizzes from './MyQuizzes';
 import CurrentGame from './CurrentGame';
 
 export default function MenuApp() {
+    
     return (
         <Tabs
             defaultValue={'Tab 1'}
